@@ -1,5 +1,6 @@
 ﻿---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 interface Props {
   title?: string;
   description?: string;
@@ -49,5 +50,6 @@ const canonicalURL = "https://affanshz.my.id";
   </head>
   <body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-surface">
     <slot />
+    <Analytics />
   </body>
 </html>
