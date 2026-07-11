@@ -140,7 +140,10 @@ import DecryptedText from '../components/DecryptedText.astro';
 </section>
 </main>
 <!-- Contact Section -->
-<section class="py-stack-xl px-grid-margin bg-background/90 relative z-20 border-t border-outline-variant/20 backdrop-blur-xl" id="contact">
+<section class="py-stack-xl px-grid-margin relative z-20 border-t border-outline-variant/20 overflow-hidden" id="contact">
+  <div class="absolute inset-0 bg-background -z-20"></div>
+  <div class="absolute inset-0 -z-10 bg-cover bg-center opacity-10 mix-blend-screen grayscale" style="background-image: url('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=2000')"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-transparent to-background/70"></div>
   <div class="max-w-7xl mx-auto flex flex-col gap-stack-xl">
     <div class="flex flex-col gap-8">
       <span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">04 // Contact</span>
