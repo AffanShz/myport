@@ -1,6 +1,7 @@
 ﻿---
 import Layout from '../layouts/Layout.astro';
 import DecryptedText from '../components/DecryptedText.astro';
+import BorderGlow from '../components/BorderGlow.jsx';
 ---
 <Layout>
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 max-w-5xl mx-auto rounded-full mt-6 w-fit bg-surface/60 backdrop-blur-3xl border border-outline-variant/10 inner-glow-top-left scale-95 transition-all duration-500 -translate-y-[150%] opacity-0">
@@ -107,35 +108,39 @@ import DecryptedText from '../components/DecryptedText.astro';
       <h2 class="font-display-lg text-display-lg text-primary uppercase">Selected Works</h2>
     </div>
     <!-- Project 1 -->
-    <div class="relative group bg-surface/20 border border-outline-variant/20 p-8 md:p-12 flex flex-col lg:flex-row gap-grid-gutter items-center min-h-[60vh] inner-glow-top-left backdrop-blur-sm">
-      <div class="w-full lg:w-5/12 flex flex-col gap-stack-md z-10 order-2 lg:order-1">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="px-3 py-1 border border-outline-variant/50 rounded-full font-label-caps text-label-caps text-on-surface-variant uppercase">Mobile App</span>
-          <span class="font-label-caps text-label-caps text-outline-variant">2026</span>
+    <BorderGlow client:load edgeSensitivity={30} glowColor="0 0 100" backgroundColor="#131314" borderRadius={0} glowRadius={40} glowIntensity={1.0} coneSpread={25} animated={true} colors={['#ffffff', '#e5e2e3', '#c4c7c8']} fillOpacity={0} className="w-full">
+      <div class="relative group p-8 md:p-12 flex flex-col lg:flex-row gap-grid-gutter items-center min-h-[60vh] backdrop-blur-sm">
+        <div class="w-full lg:w-5/12 flex flex-col gap-stack-md z-10 order-2 lg:order-1">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="px-3 py-1 border border-outline-variant/50 rounded-full font-label-caps text-label-caps text-on-surface-variant uppercase">Mobile App</span>
+            <span class="font-label-caps text-label-caps text-outline-variant">2026</span>
+          </div>
+          <h3 class="font-display-lg text-display-lg text-primary uppercase tracking-tight leading-none mb-4">dcc<br/>mobile</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-8">A sophisticated mobile application demonstrating core Dart and Flutter paradigms, engineered for high performance and seamless user interaction.</p>
+          <a href="https://github.com/AffanShz/Dinus-Career-Center-Mobile" target="_blank" rel="noopener noreferrer" class="w-fit px-8 py-4 rounded-full bg-primary text-surface font-label-caps text-label-caps uppercase hover:bg-surface-bright hover:text-primary border border-transparent hover:border-primary transition-all duration-300">Explore Repository</a>
         </div>
-        <h3 class="font-display-lg text-display-lg text-primary uppercase tracking-tight leading-none mb-4">dcc<br/>mobile</h3>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-8">A sophisticated mobile application demonstrating core Dart and Flutter paradigms, engineered for high performance and seamless user interaction.</p>
-        <a href="https://github.com/AffanShz/Dinus-Career-Center-Mobile" target="_blank" rel="noopener noreferrer" class="w-fit px-8 py-4 rounded-full bg-primary text-surface font-label-caps text-label-caps uppercase hover:bg-surface-bright hover:text-primary border border-transparent hover:border-primary transition-all duration-300">Explore Repository</a>
+        <div class="w-full lg:w-7/12 relative h-full min-h-[400px] order-1 lg:order-2 overflow-hidden border border-outline-variant/30">
+          <img class="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" alt="dcc_mobile app screenshot" src="/assets/dcc.png" />
+        </div>
       </div>
-      <div class="w-full lg:w-7/12 relative h-full min-h-[400px] order-1 lg:order-2 overflow-hidden border border-outline-variant/30">
-        <img class="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" alt="dcc_mobile app screenshot" src="/assets/dcc.png" />
-      </div>
-    </div>
+    </BorderGlow>
     <!-- Project 2 -->
-    <div class="relative group bg-surface/20 border border-outline-variant/20 p-8 md:p-12 flex flex-col lg:flex-row-reverse gap-grid-gutter items-center min-h-[60vh] inner-glow-top-left backdrop-blur-sm mt-12">
-      <div class="w-full lg:w-5/12 flex flex-col gap-stack-md z-10 order-2 lg:order-1 lg:pl-12">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="px-3 py-1 border border-outline-variant/50 rounded-full font-label-caps text-label-caps text-on-surface-variant uppercase">Agriculture Tech</span>
-          <span class="font-label-caps text-label-caps text-outline-variant">2023</span>
+    <BorderGlow client:load edgeSensitivity={30} glowColor="0 0 100" backgroundColor="#131314" borderRadius={0} glowRadius={40} glowIntensity={1.0} coneSpread={25} animated={true} colors={['#ffffff', '#e5e2e3', '#c4c7c8']} fillOpacity={0} className="w-full mt-12">
+      <div class="relative group p-8 md:p-12 flex flex-col lg:flex-row-reverse gap-grid-gutter items-center min-h-[60vh] backdrop-blur-sm">
+        <div class="w-full lg:w-5/12 flex flex-col gap-stack-md z-10 order-2 lg:order-1 lg:pl-12">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="px-3 py-1 border border-outline-variant/50 rounded-full font-label-caps text-label-caps text-on-surface-variant uppercase">Agriculture Tech</span>
+            <span class="font-label-caps text-label-caps text-outline-variant">2023</span>
+          </div>
+          <h3 class="font-display-lg text-display-lg text-primary uppercase tracking-tight leading-none mb-4">Petani<br/>Maju</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-8">Empowering local agriculture through technology. A robust platform designed to streamline supply chains and provide vital data to farmers.</p>
+          <a href="https://github.com/AffanShz/Petani-Maju-V.2" target="_blank" rel="noopener noreferrer" class="w-fit px-8 py-4 rounded-full bg-transparent text-primary font-label-caps text-label-caps uppercase border border-outline-variant hover:bg-primary hover:text-surface transition-all duration-300">View Repository</a>
         </div>
-        <h3 class="font-display-lg text-display-lg text-primary uppercase tracking-tight leading-none mb-4">Petani<br/>Maju</h3>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-8">Empowering local agriculture through technology. A robust platform designed to streamline supply chains and provide vital data to farmers.</p>
-        <a href="https://github.com/AffanShz/Petani-Maju-V.2" target="_blank" rel="noopener noreferrer" class="w-fit px-8 py-4 rounded-full bg-transparent text-primary font-label-caps text-label-caps uppercase border border-outline-variant hover:bg-primary hover:text-surface transition-all duration-300">View Repository</a>
+        <div class="w-full lg:w-7/12 relative h-full min-h-[400px] order-1 lg:order-2 overflow-hidden border border-outline-variant/30">
+          <img class="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" alt="PetaniMaju app screenshot" src="/assets/petani_maju.png" />
+        </div>
       </div>
-      <div class="w-full lg:w-7/12 relative h-full min-h-[400px] order-1 lg:order-2 overflow-hidden border border-outline-variant/30">
-        <img class="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" alt="PetaniMaju app screenshot" src="/assets/petani_maju.png" />
-      </div>
-    </div>
+    </BorderGlow>
   </div>
 </section>
 </main>
