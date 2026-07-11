@@ -2,8 +2,15 @@
 import "../styles/global.css";
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
 }
-const { title = "AFFAN SHAHZADA - Portfolio" } = Astro.props;
+const {
+  title = "AFFAN SHAHZADA - Portfolio",
+  description = "Informatics Engineering Student at Dian Nuswantoro University. Passionate Mobile Developer specializing in Flutter & Dart. Building innovative mobile applications with modern architecture.",
+  image = "/assets/profile.png",
+} = Astro.props;
+const canonicalURL = "https://affanshz.my.id";
 ---
 <!DOCTYPE html>
 <html class="dark" lang="en">
@@ -11,6 +18,30 @@ const { title = "AFFAN SHAHZADA - Portfolio" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Affan Shahzada" />
+    <meta name="keywords" content="Affan Shahzada, Flutter Developer, Mobile Developer, Dart, Portfolio, Informatics Engineering" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${canonicalURL}${image}`} />
+    <meta property="og:site_name" content="Affan Shahzada" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${canonicalURL}${image}`} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
