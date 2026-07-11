@@ -1,0 +1,26 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.inner-glow-top-left {
+  box-shadow: inset 1px 1px 0px 0px rgba(255, 255, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.parallax-mask-top {
+  mask-image: linear-gradient(to top, black 20%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to top, black 20%, transparent 80%);
+}
+
+.parallax-mask-top-30 {
+  mask-image: linear-gradient(to top, black 30%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to top, black 30%, transparent 90%);
+}

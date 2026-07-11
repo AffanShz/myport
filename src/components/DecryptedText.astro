@@ -1,0 +1,155 @@
+---
+interface Props {
+  text: string;
+  speed?: number;
+  maxIterations?: number;
+  sequential?: boolean;
+  revealDirection?: 'start' | 'end' | 'center';
+  characters?: string;
+  className?: string;
+  encryptedClassName?: string;
+  animateOn?: 'hover' | 'view' | 'click';
+  id?: string;
+}
+
+const {
+  text,
+  speed = 10,
+  maxIterations = 30,
+  sequential = true,
+  revealDirection = 'start',
+  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+  className = '',
+  encryptedClassName = '',
+  animateOn = 'hover',
+  id = `dt-${Math.random().toString(36).slice(2, 8)}`,
+} = Astro.props;
+---
+
+<span
+  id={id}
+  data-text={text}
+  data-speed={speed}
+  data-max-iterations={maxIterations}
+  data-sequential={sequential}
+  data-reveal-direction={revealDirection}
+  data-characters={characters}
+  data-class-name={className}
+  data-encrypted-class-name={encryptedClassName}
+  data-animate-on={animateOn}
+  style="display:inline-block;white-space:pre-wrap;pointer-events:none;"
+  aria-label={text}
+>
+  <span aria-hidden="true" set:html={text.split('').map(c => `<span>${c}</span>`).join('')}></span>
+</span>
+
+<script>
+  function initDecryptedText(el: HTMLElement) {
+    const text = el.dataset.text!;
+    const speed = parseInt(el.dataset.speed!);
+    const maxIterations = parseInt(el.dataset.maxIterations!);
+    const sequential = el.dataset.sequential === 'true';
+    const revealDirection = el.dataset.revealDirection as 'start' | 'end' | 'center';
+    const characters = el.dataset.characters!;
+    const className = el.dataset.className!;
+    const encryptedClassName = el.dataset.encryptedClassName!;
+    const animateOn = el.dataset.animateOn as 'hover' | 'view' | 'click';
+
+    const inner = el.querySelector('[aria-hidden]') as HTMLElement;
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    let isAnimating = false;
+    let hasAnimated = false;
+
+    function renderChars(displayText: string, revealedIndices: Set<number>, done: boolean) {
+      inner.innerHTML = displayText.split('').map((char, i) => {
+        const revealed = revealedIndices.has(i) || done;
+        const cls = revealed ? className : encryptedClassName;
+        return `<span class="${cls}">${char}</span>`;
+      }).join('');
+    }
+
+    function randomChar() {
+      return characters[Math.floor(Math.random() * characters.length)];
+    }
+
+    function shuffleText(original: string, revealed: Set<number>) {
+      return original.split('').map((c, i) => {
+        if (c === ' ') return ' ';
+        if (revealed.has(i)) return original[i];
+        return randomChar();
+      }).join('');
+    }
+
+    function getNextIndex(revealed: Set<number>, len: number) {
+      if (revealDirection === 'start') return revealed.size;
+      if (revealDirection === 'end') return len - 1 - revealed.size;
+      const middle = Math.floor(len / 2);
+      const offset = Math.floor(revealed.size / 2);
+      const idx = revealed.size % 2 === 0 ? middle + offset : middle - offset - 1;
+      if (idx >= 0 && idx < len && !revealed.has(idx)) return idx;
+      for (let i = 0; i < len; i++) if (!revealed.has(i)) return i;
+      return 0;
+    }
+
+    function runAnimation() {
+      if (isAnimating) return;
+      isAnimating = true;
+      const revealed = new Set<number>();
+      let iteration = 0;
+
+      renderChars(shuffleText(text, revealed), revealed, false);
+
+      intervalId = setInterval(() => {
+        if (sequential) {
+          if (revealed.size < text.length) {
+            const idx = getNextIndex(revealed, text.length);
+            revealed.add(idx);
+            renderChars(shuffleText(text, revealed), revealed, false);
+          } else {
+            clearInterval(intervalId!);
+            isAnimating = false;
+            renderChars(text, revealed, true);
+          }
+        } else {
+          renderChars(shuffleText(text, revealed), revealed, false);
+          iteration++;
+          if (iteration >= maxIterations) {
+            clearInterval(intervalId!);
+            isAnimating = false;
+            renderChars(text, new Set(), true);
+          }
+        }
+      }, speed);
+    }
+
+    function resetText() {
+      if (intervalId) clearInterval(intervalId);
+      isAnimating = false;
+      renderChars(text, new Set(), true);
+    }
+
+    // init display
+    renderChars(text, new Set(), true);
+
+    if (animateOn === 'hover') {
+      const trigger = el.closest('a') ?? el;
+      trigger.addEventListener('mouseenter', runAnimation);
+      trigger.addEventListener('mouseleave', resetText);
+    } else if (animateOn === 'view') {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !hasAnimated) {
+            hasAnimated = true;
+            runAnimation();
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(el);
+    } else if (animateOn === 'click') {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', () => { if (!isAnimating) runAnimation(); });
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-text][data-animate-on]').forEach(initDecryptedText);
+</script>
