@@ -1,4 +1,4 @@
-﻿---
+---
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
 interface Props {
@@ -14,7 +14,7 @@ const {
 const canonicalURL = "https://affanshz.my.id";
 ---
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html class="dark overflow-x-hidden" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,7 +48,7 @@ const canonicalURL = "https://affanshz.my.id";
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Sora:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-surface">
+  <body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-surface overflow-x-hidden w-full max-w-full">
     <slot />
     <Analytics />
   </body>
