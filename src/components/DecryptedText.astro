@@ -38,8 +38,8 @@ const {
   data-encrypted-class-name={encryptedClassName}
   data-animate-on={animateOn}
   style="display:inline-block;white-space:pre-wrap;pointer-events:none;"
-  aria-label={text}
 >
+  <span class="sr-only">{text}</span>
   <span aria-hidden="true" set:html={text.split('').map(c => `<span>${c}</span>`).join('')}></span>
 </span>
 
